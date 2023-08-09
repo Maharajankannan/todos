@@ -6,3 +6,13 @@
     border-radius: 4px;
     cursor: pointer;
 }
+ .active{
+    
+    background-color: black;
+    color: white;
+    margin: 10px;
+    padding: 9px;
+    
+    cursor: pointer;
+    border-radius: 4px;
+}
