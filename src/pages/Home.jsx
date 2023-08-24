@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Todos from '../components/todos/Todos'
+// import { useSelector } from 'react-redux';
 
 const Home = () => {
-   
+  
+  
   return (
-    <Todos/>
+    <div>
+       <Todos/>
+       
+    </div>
+   
   )
 }
 

@@ -7,6 +7,7 @@ import { updateTodos } from '../../../slice/todoSlice';
 const ModalEdit = ({showModal,  single,  close }) => {
   const dispatch = useDispatch();
   const [editData, setEditData] = useState(); 
+  
 
  
     // console.log(single[0].title,'sd')
@@ -42,11 +43,12 @@ const ModalEdit = ({showModal,  single,  close }) => {
     
     <div>
         <Modal show={showModal} onHide={close}>
+        <Form onSubmit={handleSubmit} > 
                   <Modal.Header closeButton>
                     <Modal.Title>Edit your Todos</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <Form onSubmit={handleSubmit} >  
+                     
                       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>Todo</Form.Label>
                         <Form.Control
@@ -60,7 +62,7 @@ const ModalEdit = ({showModal,  single,  close }) => {
                             
                         />
                       </Form.Group>
-                    </Form>
+                    
                   </Modal.Body>
                   <Modal.Footer>
                     <Button variant="secondary" onClick={close}>
@@ -70,6 +72,7 @@ const ModalEdit = ({showModal,  single,  close }) => {
                       Save Changes
                     </Button>
                   </Modal.Footer>
+                  </Form>
                 </Modal>
     </div>
   )

@@ -2,28 +2,38 @@ import {  createSlice } from "@reduxjs/toolkit";
 export const authSlice = createSlice({
     name:'user',
     initialState:{
-        user: JSON.parse(localStorage.getItem('loginUser')) || {
+        user:[JSON.parse(localStorage.getItem('registerUser')) ] || [
+         {
+        name:'',
         email:'',
         password:'',
         loginState: false,
-        }
+        }]
+    ,
+        
+
+        
         
     },
     reducers:{
-        login(state, action){
-            const userLogin = action.payload;
-            state.user = userLogin;
-            if(!userLogin){
-                state.user.loginState = false;
+        addUser(state, action){
+            const userRegister = action.payload;
+            state.user = userRegister;
+            if(!userRegister){
+                state.user.loginStateState = false;
             }
             else{
                 state.user.loginState = true;
-                const newState = JSON.stringify(userLogin);
-                localStorage.setItem('loginUser', newState);
+                const newState = JSON.stringify(userRegister);
+                localStorage.setItem('registerUser', newState);
+                // console.log(newState,'ns');
+                // console.log(,'ns');
             }
         },
+        
         logout(state, action){
             state.user={
+                name:'',
                 email :'',
                 password:'',
                 loginState: false,
@@ -33,5 +43,5 @@ export const authSlice = createSlice({
     }
 
 })
-export const {login, logout} = authSlice.actions;
+export const {addUser, logout} = authSlice.actions;
 export default authSlice.reducer;

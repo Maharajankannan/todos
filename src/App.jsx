@@ -6,11 +6,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes,} from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import ModalEdit from "./components/todos/ModalEdit/ModalEdit";
+import Signup from "./pages/Signup";
 
 
 
 function App() {
+  
 
   
   
@@ -25,6 +26,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/login" element={<Login/>}/>
+      <Route path="/signup" element={<Signup/>}/>
       {/* <Route path="/edit/:id" element={<ModalEdit/>}/> */}
       
     </Routes>

@@ -13,22 +13,22 @@ const Todos = () => {
   const [show, setShow] = useState(false);
   
   // const [editData, setEditData] = useState();
-  const { todos, todosPerPage, currentPage, edit, body } = useSelector(
+  const { todos, edited, todosPerPage, currentPage, edit, body } = useSelector(
     (state) => state.todo
   );
-  // console.log(todos,'to')
+  console.log(edited,'to')
   
   const dispatch = useDispatch();
   const [isLoading, setisLoading] = useState(false);
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
+  // console.log(user[0]?.loginState);
   const totalPages = todos.length / todosPerPage;
   const pages = [...Array(totalPages + 1).keys()].slice(1);
   console.log(pages);
   const indexLast = currentPage * todosPerPage;
   const indexFirst = indexLast - todosPerPage;
   const finalTodos = todos.slice(indexFirst, indexLast);
-  console.log(finalTodos,'fins')
+  // console.log(finalTodos,'fins')
   const [id, setId] = useState();
   // const singleTodo = finalTodos.filter()
   const singleTodo = finalTodos.filter((ele,ind)=> ele?.id === id);
@@ -59,10 +59,10 @@ const Todos = () => {
     <div>
       <div className="d-flex justify-content-between p-4">
         <h1>Sample API</h1>
-        {!user?.loginState ?(
-            <Link to="/login">
+        {!user[0]?.loginState ?(
+            <Link to="/signup">
             <Button variant="primary" size="lg">
-              Login to Fetch
+              Login/Signup
             </Button>
           </Link>
         ) :
@@ -76,7 +76,7 @@ const Todos = () => {
       
       <div>
         <div className="d-flex justify-content-between m-4">
-        {user?.loginState ? (
+        {user[0]?.loginState ? (
             <Button
             variant="outline-primary"
             onClick={() => dispatch(fetchTodos())}
@@ -85,7 +85,7 @@ const Todos = () => {
           </Button>
         ):''} 
           
-          {user.loginState && todos.length ? (
+          {user[0]?.loginState && todos.length ? (
             <div className="text-bold">
               <h4>
                 Page {currentPage} of {totalPages}
@@ -97,7 +97,7 @@ const Todos = () => {
         </div>
 
         <div className="row mb-3 my-3 mx-3">
-          {user.loginState && todos && singleTodo &&
+          {user[0]?.loginState && todos && singleTodo &&
             finalTodos.map((todo, index) => (
               
               <div key={index} className="col-md-3">
@@ -121,7 +121,7 @@ const Todos = () => {
             ))}
         </div>
 
-        {user.loginState && todos.length ? (
+        {user[0]?.loginState && todos.length ? (
           <div className="text-center mt-5">
             <p>
               <span className="button" onClick={navigatePrev}>

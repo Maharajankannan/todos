@@ -5,18 +5,23 @@ export const fetchTodos = createAsyncThunk('getTodos', async()=>{
     const result = await response.json();
     return result;
 })
-export const updateTodos = createAsyncThunk('update',async(data,id)=>{
+
+export const updateTodos = createAsyncThunk('update',async(data)=>{
     console.log(data,'updatedata');
-    return await fetch(`https://jsonplaceholder.typicode.com/todos`,{
-        method:"POST",
+    const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${data.id}`,{
+        method:"PUT",
         headers:{
             "Accept" : "application/json",
             "Content-type": "application/json",
         },
         body:JSON.stringify(data),
-    }).then((res)=>res.json()).catch((error)=>{
-        console.log(error);
     })
+        // console.log(res.json(),'response');
+        const result = await response.json();
+        
+        return result;
+        
+        // console.log(response,'res1');
     
 })
 
@@ -24,24 +29,43 @@ export const allTodos = createSlice({
     name:"todos",
     initialState:{
         todos:JSON.parse(localStorage.getItem('todos')) || [],
+        
         todosPerPage:20,
         currentPage:1,
         edit: false,
         loading: false,
         // id:null,
+        edited: [JSON.parse(localStorage.getItem('edited'))] ,
+        
         
     },
     extraReducers:{
         [fetchTodos.fulfilled]:(state,action)=>{
             state.todos = action.payload;
+            console.log(state.todos,'edf');
             state.todos.id = action.payload.id;
             localStorage.setItem('todos', JSON.stringify(state.todos.map((ele)=>ele)));
             
+            
         },
         [updateTodos.fulfilled]:(state,action)=>{
-            state.todos = state.todos.map((ele)=>{
-                ele.id === action.payload?.id ? action.payload : ele
-            })
+            
+            state.edited?.push(action.payload);
+            console.log(state.edited,'edfg');
+            localStorage.setItem('edited',JSON.stringify(state.edited));
+            if(state.edited?.length>1){
+                const copy = [...state.todos];
+                const index = copy?.findIndex((ind)=>ind?.id === action.payload?.id );
+                copy.splice(index,1,action.payload);
+                state.todos = copy;
+                localStorage.setItem('todos', JSON.stringify(state.todos.map((ele)=>ele)));
+            }
+            // if(state.edited){
+            //     state.edited.push(localStorage.setItem('edited'),JSON.stringify(state.edited))
+            // }
+            
+            // state.edited.id = action.payload.id;
+            
         },
 
     },
