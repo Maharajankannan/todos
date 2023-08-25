@@ -59,7 +59,7 @@ const Todos = () => {
     <div>
       <div className="d-flex justify-content-between p-4">
         <h1>Sample API</h1>
-        {!user[0]?.loginState ?(
+        {!user?.loginState ?(
             <Link to="/signup">
             <Button variant="primary" size="lg">
               Login/Signup
@@ -76,7 +76,7 @@ const Todos = () => {
       
       <div>
         <div className="d-flex justify-content-between m-4">
-        {user[0]?.loginState ? (
+        {user?.loginState ? (
             <Button
             variant="outline-primary"
             onClick={() => dispatch(fetchTodos())}
@@ -85,7 +85,7 @@ const Todos = () => {
           </Button>
         ):''} 
           
-          {user[0]?.loginState && todos.length ? (
+          {user?.loginState && todos.length ? (
             <div className="text-bold">
               <h4>
                 Page {currentPage} of {totalPages}
@@ -97,7 +97,7 @@ const Todos = () => {
         </div>
 
         <div className="row mb-3 my-3 mx-3">
-          {user[0]?.loginState && todos && singleTodo &&
+          {user?.loginState && todos && singleTodo &&
             finalTodos.map((todo, index) => (
               
               <div key={index} className="col-md-3">
@@ -121,7 +121,7 @@ const Todos = () => {
             ))}
         </div>
 
-        {user[0]?.loginState && todos.length ? (
+        {user?.loginState && todos.length ? (
           <div className="text-center mt-5">
             <p>
               <span className="button" onClick={navigatePrev}>

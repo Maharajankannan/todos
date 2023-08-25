@@ -19,3 +19,21 @@
 .pointer{
     cursor: pointer;
 }
+.new-form{
+    max-width: 800px;
+    margin: 50px auto;
+    position: relative;
+    box-shadow: 0 10px 30px 0 rgba(0, 0,0,0.1);
+    padding: 30px;
+    border-radius: 30px ;
+}
+.new-form .title{
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+    font-size: 3em;
+    line-height: 48px;
+    /* padding-bottom: 20px; */
+    color: #5543ca;
+    
+}
